@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+body {
+  font-family:
+    "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif;
+}
+
+ul a.active {
+  border-bottom: 2px solid #3f9aae;
+  font-weight: bold;
+  color: #3f9aae;
+}
