@@ -21,7 +21,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-fit ">
       <section className="mb-14">
         <Slider {...settings}>
           <div className="relative h-screen w-full max-h-80 lg:max-h-140 xl:max-h-165">
@@ -34,18 +34,18 @@ const Banner = () => {
               <img
                 src={dogAndCats}
                 alt="Logo"
-                className="absolute w-[250px] lg:h-[300px] lg:w-[400px] xl:w-[500px] xl:h-[400px] rounded-2xl top-10 -left-6   lg:top-40 lg:left-5 xl:top-40 xl:left-2"
+                className="absolute w-62.5 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-10 -left-6   lg:top-40 lg:left-5 xl:top-40 xl:left-2"
               />
               <h1 className="absolute whitespace-nowrap  top-10 left-30 text-2xl lg:top-60 lg:left-75 xl:top-71 xl:left-85  text-gray-900  lg:text-4xl xl:text-5xl font-bold">
-                “Find Your Furry
+                “Find Your Furry —
               </h1>
               <h1 className="absolute whitespace-nowrap  top-20 left-60 lg:top-72 lg:left-110 xl:top-87 xl:left-140  text-gray-900 text-[16px] lg:text-2xl xl:text-3xl font-bold">
-                —Friend Today!”
+                Friend Today!”
               </h1>
               <img
                 src={adoptImg}
                 alt="Logo"
-                className="absolute w-[180px] lg:h-[300px] lg:w-[400px] xl:w-[500px] xl:h-[400px] rounded-2xl top-40 right-5 xl:top-40 xl:right-2  lg:top-40 lg:right-5"
+                className="absolute w-45 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-40 right-5 xl:top-40 xl:right-2  lg:top-40 lg:right-5"
               />
             </div>
           </div>
@@ -59,7 +59,7 @@ const Banner = () => {
               <img
                 src={dogHomeImg}
                 alt="Logo"
-                className="absolute w-[280px] lg:h-[300px] lg:w-[400px] xl:w-[500px] xl:h-[400px] rounded-2xl top-30 -left-6   lg:top-40 lg:left-5 xl:top-40 xl:left-2"
+                className="absolute w-70 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-30 -left-6   lg:top-40 lg:left-5 xl:top-40 xl:left-2"
               />
               <h1 className="absolute whitespace-nowrap  top-10 left-20 text-2xl lg:top-50 lg:left-75 xl:top-50 xl:left-85  text-gray-900  lg:text-4xl xl:text-5xl font-bold">
                 “Adopt, Don’t Shop —
@@ -70,7 +70,7 @@ const Banner = () => {
               <img
                 src={dogImg}
                 alt="Logo"
-                className="absolute w-[180px] lg:h-[300px] lg:w-[400px] xl:w-[500px] xl:h-[400px] rounded-2xl top-40 right-5 xl:top-40 xl:right-2  lg:top-40 lg:right-5"
+                className="absolute w-45 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-40 right-5 xl:top-40 xl:right-2  lg:top-40 lg:right-5"
               />
             </div>
           </div>
@@ -84,18 +84,18 @@ const Banner = () => {
               <img
                 src={animalsCareImg}
                 alt="Logo"
-                className="absolute w-[220px] lg:h-[300px] lg:w-[400px] xl:w-[500px] xl:h-[400px] rounded-2xl top-20 -left-2   lg:top-40 lg:left-5 xl:top-40 xl:left-2"
+                className="absolute w-55 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-20 -left-2   lg:top-40 lg:left-5 xl:top-40 xl:left-2"
               />
               <h1 className="absolute whitespace-nowrap  top-12 left-10 text-2xl lg:top-30 lg:left-55 xl:top-35 xl:left-75  text-gray-900  lg:text-4xl xl:text-5xl font-bold">
-                “Because Every Pet Deserves
+                “Because Every Pet Deserves —
               </h1>
               <h1 className="absolute whitespace-nowrap  top-20 left-60 lg:top-40 lg:left-115 xl:top-50 xl:left-140  text-gray-900 text-[16px] lg:text-3xl xl:text-4xl font-bold">
-                —Love and Care.”
+                Love and Care.”
               </h1>
               <img
                 src={chairWithPet}
                 alt="Logo"
-                className="absolute w-[220px] lg:h-[300px] lg:w-[400px] xl:w-[500px] xl:h-[400px] rounded-2xl top-30 right-2 xl:top-50 xl:right-20  lg:top-50 lg:right-25"
+                className="absolute w-55 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-30 right-2 xl:top-50 xl:right-20  lg:top-50 lg:right-25"
               />
             </div>
           </div>

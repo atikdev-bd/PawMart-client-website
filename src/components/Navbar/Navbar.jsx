@@ -8,8 +8,8 @@ const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   console.log(user?.photoURL);
   return (
-    <div className="navbar md:px-4 lg:px-8 bg-base-100 shadow-sm">
-      <div className="navbar-start">
+    <div className="navbar  md:px-4 lg:px-8 bg-base-100 shadow-sm">
+      <div className="navbar-start ">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -66,7 +66,7 @@ const Navbar = () => {
         </div>
         <img className="w-16 h-full" src={logo} alt="" />
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center sticky hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           {user ? (
             <>
