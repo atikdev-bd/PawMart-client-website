@@ -7,30 +7,30 @@ const Category = () => {
     {
       name: "Pets (Adoption)",
       icon: "🐾",
-      slug: "pets",
+      slug: "Pets",
       desc: "Find your perfect companion",
     },
     {
-      name: "Pet Food",
+      name: "Pet Foods",
       icon: "🍖",
-      slug: "pet-food",
+      slug: "Foods",
       desc: "Healthy & nutritious food",
     },
     {
       name: "Accessories",
       icon: "🦴",
-      slug: "accessories",
+      slug: "Accessories",
       desc: "Toys, collars & more",
     },
     {
       name: "Pet Care Products",
       icon: "🧴",
-      slug: "pet-care-products",
+      slug: "Care products",
       desc: "Care & hygiene essentials",
     },
   ];
   return (
-    <div className=" mb-50">
+    <div className=" my-20">
       <section className="max-w-7xl mx-auto px-4 ">
         <h2 className="text-3xl font-bold text-center mb-5">
           Browse by Category

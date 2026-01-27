@@ -1,19 +1,18 @@
 import React, { useLayoutEffect, useState } from "react";
-import { Link } from "react-router";
 import useAxios from "../../Hooks/useAxios";
+import { Link } from "react-router";
 
-const PetsAndSupplies = () => {
-  const [filtered, setFiltered] = useState([]);
-  const [allListings, setAllListings] = useState([]);
+const RecentListing = () => {
   const axiosInstance = useAxios();
+  const [recentListing, setRecentListing] = useState([]);
+  console.log(recentListing);
 
   useLayoutEffect(() => {
     axiosInstance
-      .get("/allProducts")
+      .get("/allListings")
       .then((data) => {
         console.log(data.data);
-        setFiltered(data.data);
-        setAllListings(data.data);
+        setRecentListing(data.data);
       })
 
       .catch((err) => {
@@ -21,41 +20,22 @@ const PetsAndSupplies = () => {
       });
   }, [axiosInstance]);
 
-  const handleCategoryFilter = (category) => {
-    if (category === "All") {
-      setFiltered(allListings);
-    } else {
-      const result = allListings.filter((item) => item.category === category);
-      setFiltered(result);
-    }
-  };
-
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Header */}
-        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <h2 className="text-3xl font-bold">All Listings</h2>
+      <h1 className="text-2xl text-gray-700 text-center">
+        Recent Listing {recentListing.length}{" "}
+      </h1>
+      <div>
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl font-bold">Latest Listings</h2>
+            <p className="text-gray-500 mt-2">
+              Discover the newest pets & products
+            </p>
+          </div>
 
-          {/* Category Filter */}
-          <select
-            onClick={(e) => handleCategoryFilter(e.target.value)}
-            className="border rounded-lg px-4 py-2"
-          >
-            <option value="All">All Categories</option>
-            <option value="Pets">Pets</option>
-            <option value="Foods">Foods</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Care products">Care Products</option>
-          </select>
-        </div>
-
-        {/* Grid */}
-        {filtered.length === 0 ? (
-          <p className="text-gray-500">No listings found.</p>
-        ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((item) => (
+            {recentListing.map((item) => (
               <div
                 key={item._id}
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden group"
@@ -80,14 +60,18 @@ const PetsAndSupplies = () => {
                     {item.name}
                   </h3>
 
-                  <p className="text-sm text-gray-500">📍 {item.location}</p>
+                  <p className="text-sm text-gray-500 flex items-center gap-1">
+                    📍 {item.location}
+                  </p>
 
+                  {/* Price */}
                   <p className="text-xl font-bold text-blue-600">
                     {item.category === "Pets" || item.price === 0
                       ? "Free for Adoption"
                       : `৳${item.price}`}
                   </p>
 
+                  {/* Button */}
                   <Link
                     to={`/productDetails/${item._id}`}
                     className="inline-block w-full text-center mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-2 rounded-lg font-semibold transition"
@@ -98,10 +82,10 @@ const PetsAndSupplies = () => {
               </div>
             ))}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default PetsAndSupplies;
+export default RecentListing;

@@ -8,6 +8,7 @@ import MyOrders from "../components/MyOrders/MyOrders";
 import AddListing from "../components/AddListing/AddListing";
 import MyListing from "../components/MyListing/MyListing";
 import CategoryFilteredProduct from "../components/Category/CategoryFilteredProduct";
+import ProductDetails from "../components/ProductDetails/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
         path: "/category-filtered-product/:category",
 
         Component: CategoryFilteredProduct,
+      },
+      {
+        path: "/productDetails/:id",
+        Component: ProductDetails,
       },
     ],
   },

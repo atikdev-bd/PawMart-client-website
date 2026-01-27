@@ -13,7 +13,7 @@ const MyListing = () => {
   useEffect(() => {
     if (user?.email) {
       axiosInstance
-        .get(`/myListings?email=${user?.email}`)
+        .get(`/listings?email=${user?.email}`)
         .then((data) => {
           console.log(data.data);
           setMyListing(data.data);

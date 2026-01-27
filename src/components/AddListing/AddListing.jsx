@@ -67,9 +67,9 @@ const AddListing = () => {
               <label className="block font-medium mb-1">Category</label>
               <select name="category" className="w-full border rounded-lg p-2">
                 <option value="Pets">Pets</option>
-                <option value="Food">Food</option>
+                <option value="Foods">Foods</option>
                 <option value="Accessories">Accessories</option>
-                <option value="Care Products">Care Products</option>
+                <option value="Care products">Care Products</option>
               </select>
             </div>
 
