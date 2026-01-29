@@ -14,11 +14,11 @@ const AuthContextProvider = ({ children }) => {
   /// create user with email and password
 
   const [user, setUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // Create User
   const register = (email, password) => {
-    // setLoading(true);
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -36,7 +36,7 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // setLoading(false);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -46,6 +46,7 @@ const AuthContextProvider = ({ children }) => {
     logout,
     login,
     user,
+    loading,
   };
 
   return (

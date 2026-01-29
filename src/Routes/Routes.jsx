@@ -9,6 +9,7 @@ import AddListing from "../components/AddListing/AddListing";
 import MyListing from "../components/MyListing/MyListing";
 import CategoryFilteredProduct from "../components/Category/CategoryFilteredProduct";
 import ProductDetails from "../components/ProductDetails/ProductDetails";
+import PrivetRoutes from "./PrivetRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -35,15 +36,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myOrders",
-        Component: MyOrders,
+        element: (
+          <PrivetRoutes>
+            <MyOrders></MyOrders>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/addListing",
-        Component: AddListing,
+        element: (
+          <PrivetRoutes>
+            <AddListing></AddListing>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/myListing",
-        Component: MyListing,
+        element: (
+          <PrivetRoutes>
+            <MyListing></MyListing>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/category-filtered-product/:category",
@@ -52,7 +65,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/productDetails/:id",
-        Component: ProductDetails,
+        element: (
+          <PrivetRoutes>
+            <ProductDetails></ProductDetails>
+          </PrivetRoutes>
+        ),
       },
     ],
   },
