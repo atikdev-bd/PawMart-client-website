@@ -10,18 +10,16 @@ const ProductDetails = () => {
   const [singleItemDetails, setSingleItemDetails] = useState(null);
   const currentDateTime = new Date();
   const modalRef = useRef();
-  console.log(singleItemDetails);
 
   useLayoutEffect(() => {
     axiosInstance
       .get(`/product-details/${id}`)
       .then((result) => {
-        console.log(result.data);
         setSingleItemDetails(result.data);
       })
 
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   }, [axiosInstance, id]);
 
@@ -29,9 +27,60 @@ const ProductDetails = () => {
     modalRef.current.showModal();
   };
 
-  console.log(id);
+  const handleSubmitOrder = (e) => {
+    e.preventDefault();
+    const name = user.displayName;
+    const email = user.email;
+    const productName = singleItemDetails.name;
+    const productId = singleItemDetails._id;
+    const category = singleItemDetails.category;
+    const quantity = e.target.quantity.value;
+    const address = e.target.address.value;
+    const price = e.target.price.value;
+    const phone = e.target.phone.value;
+    const date = e.target.date.value;
+    const notes = e.target.notes.value;
+
+    const orderInfo = {
+      productName,
+      productId,
+      name,
+      email,
+      category,
+      quantity,
+      address,
+      price,
+      phone,
+      date,
+      notes,
+    };
+
+    console.log(
+      name,
+      email,
+      category,
+      quantity,
+      address,
+      price,
+      phone,
+      date,
+      notes,
+      productName,
+      productId,
+    );
+
+    axiosInstance
+      .post("/order-details", orderInfo)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   if (!singleItemDetails)
     return <p className="text-center mt-10">Loading...</p>;
+
   return (
     <div>
       {" "}
@@ -70,7 +119,7 @@ const ProductDetails = () => {
             <button
               //   onClick={() => setShowModal(true)}
               onClick={handleShowModal}
-              className="mt-6 w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-xl font-semibold"
+              className="mt-6 w-full bg-linear-to-r from-green-300 to-blue-300 hover:from-green-400 hover:to-blue-400 text-gray-800 py-3 rounded-xl font-semibold"
             >
               Adopt / Order Now
             </button>
@@ -80,168 +129,167 @@ const ProductDetails = () => {
         {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
         <dialog ref={modalRef} className="modal">
-          <div className="modal-box">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-              <div>
-                <h1>this is good for me</h1>
+          <div className="modal-box ">
+            <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl p-6 relative">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn btn-sm btn-circle btn-ghost bg-gray-100 absolute right-2  top-2">
+                  ✕
+                </button>
+              </form>
+              <div className="text-1xl text-left font-bold mb-4">
+                {/* Adopt / Order: {listing.name} */}
+                <h2>Product-Name : {singleItemDetails?.name}</h2>
+                <h2>Product-Id : {singleItemDetails?._id}</h2>
               </div>
-            </form>
 
-            <div className="">
-              <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl p-6 relative">
-                <h2 className="text-2xl font-bold mb-4">
-                  {/* Adopt / Order: {listing.name} */}
-                </h2>
+              <form onSubmit={handleSubmitOrder}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Buyer Name */}
+                  <div>
+                    <label className="text-sm block text-gray-600">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      name="buyerName"
+                      value={user?.displayName}
+                      readOnly
+                      className="border  w-full  p-2 rounded bg-gray-100"
+                      placeholder="Buyer Name"
+                    />
+                  </div>
+                  {/* Email */}
+                  <div>
+                    <label className="text-sm block text-gray-600">
+                      Your Email
+                    </label>
+                    <input
+                      type="text"
+                      value={user?.email}
+                      name="email"
+                      readOnly
+                      className="border  w-full  p-2 rounded bg-gray-100"
+                      placeholder="Your email"
+                    />
+                  </div>
 
-                <form
-                // onSubmit={handleSubmit}
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Buyer Name */}
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Your Name
-                      </label>
+                  {/* Product Category */}
+                  <div>
+                    <label className="text-sm block text-gray-600">
+                      Product Category
+                    </label>
+                    <input
+                      type="text"
+                      name="ProductName"
+                      value={singleItemDetails?.category}
+                      readOnly
+                      className="border  w-full  p-2 rounded bg-gray-100"
+                      placeholder="Product Name"
+                    />
+                  </div>
+
+                  {/* Quantity */}
+                  <div>
+                    <label className="text-sm block text-gray-600">
+                      Quantity
+                    </label>
+                    {singleItemDetails.category === "Pets" ? (
                       <input
-                        type="text"
-                        name="buyerName"
+                        type="number"
+                        name="quantity"
+                        value="1"
                         readOnly
                         className="border  w-full  p-2 rounded bg-gray-100"
-                        placeholder="Buyer Name"
                       />
-                    </div>
-                    {/* Email */}
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Your Email
-                      </label>
+                    ) : (
                       <input
-                        type="text"
-                        value={user?.email}
-                        name="email"
-                        readOnly
+                        type="number"
+                        min="0"
+                        name="quantity"
                         className="border  w-full  p-2 rounded bg-gray-100"
-                        placeholder="Your email"
                       />
-                    </div>
+                    )}
+                  </div>
 
-                    {/* Product Name */}
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Product Name
-                      </label>
-                      <input
-                        type="text"
-                        name="ProductName"
-                        value={singleItemDetails?.name}
-                        readOnly
-                        className="border  w-full  p-2 rounded bg-gray-100"
-                        placeholder="Product Name"
-                      />
-                    </div>
-
-                    {/* Quantity */}
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Quantity
-                      </label>
-                      {singleItemDetails.category === "Pets" ? (
-                        <input
-                          type="number"
-                          name="quantity"
-                          value="1"
-                          readOnly
-                          className="border  w-full  p-2 rounded bg-gray-100"
-                        />
-                      ) : (
-                        <input
-                          type="number"
-                          min="0"
-                          name="quantity"
-                          className="border  w-full  p-2 rounded bg-gray-100"
-                        />
-                      )}
-                    </div>
-
-                    {/* Price */}
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Price
-                      </label>
+                  {/* Price */}
+                  <div>
+                    <label className="text-sm block text-gray-600">Price</label>
+                    {singleItemDetails.category === "Pets" ? (
                       <input
                         type="text"
                         name="price"
+                        value="0"
                         readOnly
                         className="border  w-full  p-2 rounded bg-gray-100"
                         placeholder="Price"
                       />
-                    </div>
-
-                    {/* Address */}
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Address
-                      </label>
+                    ) : (
                       <input
                         type="text"
-                        name="address"
+                        name="price"
+                        value={singleItemDetails?.price}
                         readOnly
                         className="border  w-full  p-2 rounded bg-gray-100"
-                        placeholder="Your Address"
+                        placeholder="Price"
                       />
-                    </div>
-
-                    {/* Date */}
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Date
-                      </label>
-                      <input
-                        type="text"
-                        name="date"
-                        value={currentDateTime}
-                        readOnly
-                        className="border  w-full  p-2 rounded bg-gray-100"
-                        placeholder="Current Date"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-sm block text-gray-600">
-                        Phone
-                      </label>
-                      <input
-                        type="text"
-                        name="phone"
-                        readOnly
-                        className="border  w-full  p-2 rounded bg-gray-100"
-                        placeholder="Your Phone"
-                      />
-                    </div>
+                    )}
                   </div>
+
+                  {/* Address */}
                   <div>
-                    <label className="text-sm block text-gray-600">Notes</label>
-                    <textarea
-                      name="notes"
-                      className="border  p-2 w-full rounded  "
-                      placeholder="Additional Notes"
-                      rows="3"
+                    <label className="text-sm block text-gray-600">
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      className="border  w-full  p-2 rounded bg-gray-100"
+                      placeholder="Your Address"
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="md:col-span-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold"
-                  >
-                    Confirm Order
-                  </button>
 
-                  {/* Notes */}
-                </form>
-              </div>
+                  {/* Date */}
+                  <div>
+                    <label className="text-sm block text-gray-600">Date</label>
+                    <input
+                      type="text"
+                      name="date"
+                      value={currentDateTime}
+                      readOnly
+                      className="border  w-full  p-2 rounded bg-gray-100"
+                      placeholder="Current Date"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm block text-gray-600">Phone</label>
+                    <input
+                      type="text"
+                      name="phone"
+                      className="border  w-full  p-2 rounded bg-gray-100"
+                      placeholder="Your Phone"
+                    />
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <label className="text-sm block text-gray-600">Notes</label>
+                  <textarea
+                    name="notes"
+                    className="border  p-2 w-full rounded  "
+                    placeholder="Additional Notes"
+                    rows="3"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="md:col-span-2 w-full bg-linear-to-r from-green-300 to-blue-300 hover:from-green-400 hover:to-blue-400 text-gray-800 py-3 rounded-xl font-semibold"
+                >
+                  Confirm Order
+                </button>
+
+                {/* Notes */}
+              </form>
             </div>
           </div>
         </dialog>

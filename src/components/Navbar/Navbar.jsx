@@ -3,13 +3,13 @@ import logo from "../../assets/Pawmart__4.png";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import profileIcon from "../../assets/ProfileIcon.png";
+import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  console.log(user?.photoURL);
   return (
-    <div className="navbar  md:px-4 lg:px-8 bg-base-100 shadow-sm">
-      <div className="navbar-start ">
+    <div className="navbar bg-linear-to-r from-green-50 to-blue-50 sticky top-0 z-50  md:px-4 lg:px-8 bg-base-100 shadow-sm">
+      <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -103,11 +103,16 @@ const Navbar = () => {
       <div className="navbar-end space-x-4">
         {user ? (
           <>
-            <button onClick={logout} className="">
-              <Link className="font-semibold text-[#3F9AAE]" to="/register">
+            <Link
+              to="/register"
+              onClick={logout}
+              className="flex   justify-center items-center gap-1"
+            >
+              <CiLogout className="text-[#3F9AAE] size-5  hover:text-red-600 " />
+              <button className="font-semibold cursor-pointer text-[#3F9AAE] hover:text-[#3c7986]  ">
                 Logout
-              </Link>
-            </button>
+              </button>
+            </Link>
             <div className="border border-[#3F9AAE] bg-[#ffecd8] rounded-full p-0.5">
               {user?.photoUrl ? (
                 <img

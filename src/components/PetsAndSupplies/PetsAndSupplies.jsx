@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Link } from "react-router";
 import useAxios from "../../Hooks/useAxios";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 const PetsAndSupplies = () => {
   const [filtered, setFiltered] = useState([]);
@@ -11,13 +13,12 @@ const PetsAndSupplies = () => {
     axiosInstance
       .get("/allProducts")
       .then((data) => {
-        console.log(data.data);
         setFiltered(data.data);
         setAllListings(data.data);
       })
 
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        // console.log(err);
       });
   }, [axiosInstance]);
 
@@ -55,8 +56,12 @@ const PetsAndSupplies = () => {
           <p className="text-gray-500">No listings found.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((item) => (
-              <div
+            {filtered.map((item, index) => (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                viewport={{ once: true }}
                 key={item._id}
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden group"
               >
@@ -69,7 +74,7 @@ const PetsAndSupplies = () => {
                   />
 
                   {/* Category Badge */}
-                  <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                  <span className="absolute top-3 left-3 bg-[#3F9AAE] hover:bg-[#3c7986] text-white text-xs px-3 py-1 rounded-full">
                     {item.category}
                   </span>
                 </div>
@@ -82,7 +87,7 @@ const PetsAndSupplies = () => {
 
                   <p className="text-sm text-gray-500">📍 {item.location}</p>
 
-                  <p className="text-xl font-bold text-blue-600">
+                  <p className="text-xl font-bold text-blue-400">
                     {item.category === "Pets" || item.price === 0
                       ? "Free for Adoption"
                       : `৳${item.price}`}
@@ -90,12 +95,12 @@ const PetsAndSupplies = () => {
 
                   <Link
                     to={`/productDetails/${item._id}`}
-                    className="inline-block w-full text-center mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-2 rounded-lg font-semibold transition"
+                    className="inline-block w-full text-center mt-3 bg-linear-to-r from-green-300 to-blue-300 hover:from-blue-400 hover:to-green-400 text-gray-800 py-2 rounded-lg font-semibold transition"
                   >
                     See Details
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

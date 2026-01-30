@@ -1,42 +1,46 @@
 import React, { useLayoutEffect, useState } from "react";
 import useAxios from "../../Hooks/useAxios";
 import { Link } from "react-router";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 const RecentListing = () => {
   const axiosInstance = useAxios();
   const [recentListing, setRecentListing] = useState([]);
-  console.log(recentListing);
+  // console.log(recentListing);
 
   useLayoutEffect(() => {
     axiosInstance
       .get("/allListings")
       .then((data) => {
-        console.log(data.data);
         setRecentListing(data.data);
       })
 
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        // console.log(err);
       });
   }, [axiosInstance]);
 
   return (
     <div>
-      <h1 className="text-2xl text-gray-700 text-center">
-        Recent Listing {recentListing.length}{" "}
-      </h1>
       <div>
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold">Latest Listings</h2>
+            <h2 className="text-3xl font-bold">
+              <span className="text-blue-400">Latest</span> Listings
+            </h2>
             <p className="text-gray-500 mt-2">
               Discover the newest pets & products
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {recentListing.map((item) => (
-              <div
+            {recentListing.map((item, index) => (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                viewport={{ once: true }}
                 key={item._id}
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden group"
               >
@@ -49,7 +53,7 @@ const RecentListing = () => {
                   />
 
                   {/* Category Badge */}
-                  <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                  <span className="absolute top-3 left-3 bg-[#3F9AAE] hover:bg-[#3c7986] text-white text-xs px-3 py-1 rounded-full">
                     {item.category}
                   </span>
                 </div>
@@ -65,7 +69,7 @@ const RecentListing = () => {
                   </p>
 
                   {/* Price */}
-                  <p className="text-xl font-bold text-blue-600">
+                  <p className="text-xl font-bold text-blue-400">
                     {item.category === "Pets" || item.price === 0
                       ? "Free for Adoption"
                       : `৳${item.price}`}
@@ -74,12 +78,12 @@ const RecentListing = () => {
                   {/* Button */}
                   <Link
                     to={`/productDetails/${item._id}`}
-                    className="inline-block w-full text-center mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-2 rounded-lg font-semibold transition"
+                    className="inline-block w-full text-center mt-3 bg-linear-to-r from-green-300 to-blue-300 hover:from-green-400 hover:to-blue-400 text-gray-800 py-2 rounded-lg font-semibold transition"
                   >
                     See Details
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

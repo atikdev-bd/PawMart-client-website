@@ -8,25 +8,23 @@ import { Link } from "react-router";
 const Register = () => {
   const { register, user } = useAuth();
   const provider = new GoogleAuthProvider();
-  console.log(register);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, email, password);
 
     register(email, password)
-      .then((result) => {
+      .then(() => {
         // Signed up
-        console.log(result);
+        // console.log(result);
         // ...
       })
 
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+      .catch(() => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // console.log(errorCode, errorMessage);
         // ..
       });
   };
@@ -36,12 +34,12 @@ const Register = () => {
       return alert("You are already logged in");
     } else {
       signInWithPopup(auth, provider)
-        .then((result) => {
-          console.log(result);
+        .then(() => {
+          // console.log(result);
         })
 
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // console.log(error);
         });
     }
   };

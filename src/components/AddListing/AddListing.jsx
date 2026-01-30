@@ -7,7 +7,6 @@ const AddListing = () => {
   const [formData, setFormData] = useState({});
   const axiosInstance = useAxios();
   const { user } = useAuth();
-  console.log(formData);
   const handleSubmitListing = (e) => {
     e.preventDefault();
 
@@ -19,7 +18,6 @@ const AddListing = () => {
     }
 
     setFormData(data);
-    console.log(data);
 
     axiosInstance
       .post("/listings", data)
@@ -33,11 +31,10 @@ const AddListing = () => {
             timer: 1000,
           });
         }
-        console.log(data);
       })
 
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   };
 

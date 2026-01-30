@@ -7,6 +7,9 @@ import dogHomeImg from "../../assets/bannerImg/dogHome-removebg-preview.png";
 import dogImg from "../../assets/bannerImg/dogs-removebg-preview.png";
 import animalsCareImg from "../../assets/bannerImg/animalsCare-removebg-preview.png";
 import chairWithPet from "../../assets/bannerImg/chair-removebg-preview.png";
+import { Typewriter } from "react-simple-typewriter";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 const Banner = () => {
   const settings = {
@@ -31,18 +34,38 @@ const Banner = () => {
               className="w-full h-full object-cover"
             />
             <div className="flex justify-between">
-              <img
+              <motion.img
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
                 src={dogAndCats}
                 alt="Logo"
                 className="absolute w-62.5 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-10 -left-6   lg:top-40 lg:left-5 xl:top-40 xl:left-2"
               />
               <h1 className="absolute whitespace-nowrap  top-10 left-30 text-2xl lg:top-60 lg:left-75 xl:top-71 xl:left-85  text-gray-900  lg:text-4xl xl:text-5xl font-bold">
-                “Find Your Furry —
+                “Find Your
               </h1>
               <h1 className="absolute whitespace-nowrap  top-20 left-60 lg:top-72 lg:left-110 xl:top-87 xl:left-140  text-gray-900 text-[16px] lg:text-2xl xl:text-3xl font-bold">
-                Friend Today!”
+                <span className="whitespace-nowrap  top-20 left-55 lg:top-62 lg:left-110 xl:top-66 xl:left-140  text-gray-900 text-[16px] lg:text-2xl xl:text-3xl font-bold">
+                  <Typewriter
+                    words={[
+                      "Perfect Pet.",
+                      "Best Pet Foods.",
+                      "Pet Accessories.",
+                    ]}
+                    loop={0} // 0 = infinite
+                    cursor
+                    cursorStyle="|"
+                    typeSpeed={70}
+                    deleteSpeed={50}
+                    delaySpeed={1500}
+                  />
+                </span>
               </h1>
-              <img
+              <motion.img
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
                 src={adoptImg}
                 alt="Logo"
                 className="absolute w-45 lg:h-75 lg:w-100 xl:w-125 xl:h-100 rounded-2xl top-40 right-5 xl:top-40 xl:right-2  lg:top-40 lg:right-5"

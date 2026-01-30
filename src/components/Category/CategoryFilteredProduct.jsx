@@ -1,34 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import Category from "./Category";
 import useAxios from "../../Hooks/useAxios";
+import CategoryFilteredBySmall from "./CategoryFilteredBySmall";
 
 const CategoryFilteredProduct = () => {
   const { category } = useParams();
-  console.log(typeof category);
+
   const axiosInstance = useAxios();
-  console.log(category);
 
   const [categoryProduct, setCategoryProduct] = useState([]);
-  console.log(categoryProduct);
 
   useEffect(() => {
     axiosInstance
       .get(`/category-filtered-product?category=${category}`)
       .then((data) => {
-        console.log(data.data);
-        console.log(data.data);
         setCategoryProduct(data.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   }, [axiosInstance, category]);
 
   return (
     <div className="">
-      <Category></Category>
-
+      <CategoryFilteredBySmall></CategoryFilteredBySmall>
+      <h2 className=" text-blue-400 p-2 text-2xl">Browse by categories</h2>
       <div>
         {categoryProduct.length === 0 ? (
           <h2>There are no categories items </h2>
@@ -75,7 +71,7 @@ const CategoryFilteredProduct = () => {
                     {/* Button */}
                     <Link
                       to={`/productDetails/${item._id}`}
-                      className="inline-block w-full text-center mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-2 rounded-lg font-semibold transition"
+                      className="inline-block w-full text-center mt-3 bg-linear-to-r from-green-300 to-blue-300 hover:from-green-400 hover:to-blue-400 text-gray-800 py-2 rounded-lg font-semibold transition"
                     >
                       See Details
                     </Link>

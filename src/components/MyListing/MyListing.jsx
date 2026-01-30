@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 const MyListing = () => {
   const [myListing, setMyListing] = useState([]);
-  console.log(myListing);
   const axiosInstance = useAxios();
   const { user } = useAuth();
 
@@ -15,12 +14,11 @@ const MyListing = () => {
       axiosInstance
         .get(`/listings?email=${user?.email}`)
         .then((data) => {
-          console.log(data.data);
           setMyListing(data.data);
         })
 
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // console.log(error);
         });
     }
   }, [user?.email, axiosInstance]);
@@ -34,10 +32,10 @@ const MyListing = () => {
           setMyListing(remainingData);
           Swal.fire("Deleted!", "Your listing has been deleted.", "success");
         }
-        console.log(result);
+       
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   };
 

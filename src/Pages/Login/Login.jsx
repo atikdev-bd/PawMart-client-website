@@ -7,7 +7,6 @@ import { Link, useLocation, useNavigate } from "react-router";
 
 const Login = () => {
   const { user, login } = useAuth();
-  console.log(user);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,16 +19,15 @@ const Login = () => {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
 
     login(email, password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        // console.log(result);
         navigate(from, { replace: true });
       })
 
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   };
 
@@ -38,13 +36,13 @@ const Login = () => {
       return alert("You are already logged in");
     } else {
       signInWithPopup(auth, provider)
-        .then((result) => {
-          console.log(result);
+        .then(() => {
+          // console.log(result);
           navigate(from, { replace: true });
         })
 
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // console.log(error);
         });
     }
   };
@@ -52,7 +50,7 @@ const Login = () => {
   return (
     <div>
       <div className="min-h-screen flex items-center justify-center  p-4">
-        <div className="w-full max-w-md bg-linear-to-br from-[#F5F2F2] to-[#f5bc80] p-8 rounded-2xl shadow-lg">
+        <div className="w-full max-w-md bg-linear-to-r from-blue-200 to-green-200 p-8 rounded-2xl shadow-lg">
           <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
           <form onSubmit={handleLoginSubmit} className="space-y-4">
@@ -63,7 +61,7 @@ const Login = () => {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
