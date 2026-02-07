@@ -4,6 +4,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
 import { useAuth } from "../../Hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { user, login } = useAuth();
@@ -23,26 +24,58 @@ const Login = () => {
     login(email, password)
       .then(() => {
         // console.log(result);
+        Swal.fire({
+          position: "top",
+          title: "Success",
+          text: "Login  Successfully",
+          icon: "success",
+          timer: 1500,
+        });
         navigate(from, { replace: true });
       })
 
-      .catch(() => {
-        // console.log(error);
+      .catch((error) => {
+        const errorMessage = error.message;
+        Swal.fire({
+          position: "center",
+          title: "Error!",
+          text: `${errorMessage}`,
+          icon: "error",
+          confirmButtonText: "Cool",
+        });
       });
   };
 
   const handleGoogleSignIn = () => {
     if (user) {
-      return alert("You are already logged in");
+      Swal.fire({
+        position: "center",
+        text: "User Already Login",
+        confirmButtonText: "Cool",
+      });
+      return;
     } else {
       signInWithPopup(auth, provider)
         .then(() => {
-          // console.log(result);
+          Swal.fire({
+            position: "top",
+            title: "Success",
+            text: "Login  Successfully",
+            icon: "success",
+            timer: 1500,
+          });
           navigate(from, { replace: true });
         })
 
-        .catch(() => {
-          // console.log(error);
+        .catch((error) => {
+          const errorMessage = error.message;
+          Swal.fire({
+            position: "center",
+            title: "Error!",
+            text: `${errorMessage}`,
+            icon: "error",
+            confirmButtonText: "Cool",
+          });
         });
     }
   };
@@ -50,7 +83,7 @@ const Login = () => {
   return (
     <div>
       <div className="min-h-screen flex items-center justify-center  p-4">
-        <div className="w-full max-w-md bg-linear-to-r from-blue-200 to-green-200 p-8 rounded-2xl shadow-lg">
+        <div className="w-full max-w-md bg-linear-to-r from-blue-100 to-green-100 p-8 rounded-2xl shadow-lg">
           <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
           <form onSubmit={handleLoginSubmit} className="space-y-4">
@@ -105,18 +138,18 @@ const Login = () => {
             <h1 className="text-center text-gray-500 my-2 text-[20px] font-bold">
               OR
             </h1>
-            <button
-              onClick={() => handleGoogleSignIn()}
-              className="w-full pointer bg-[#206b7a] hover:bg-[#05313a]  rounded-lg"
-            >
-              <div className="flex justify-center items-center gap-1 p-2 w-full">
-                <img className="w-7 h-7" src={googleIcon} alt="Google Icon" />
-                <span className="text-white  font-semibold">
-                  Continue with Google
-                </span>
-              </div>
-            </button>
           </form>
+          <button
+            onClick={() => handleGoogleSignIn()}
+            className="w-full pointer bg-[#206b7a] hover:bg-[#05313a]  rounded-lg"
+          >
+            <div className="flex justify-center items-center gap-1 p-2 w-full">
+              <img className="w-7 h-7" src={googleIcon} alt="Google Icon" />
+              <span className="text-white  font-semibold">
+                Continue with Google
+              </span>
+            </div>
+          </button>
         </div>
       </div>
     </div>
